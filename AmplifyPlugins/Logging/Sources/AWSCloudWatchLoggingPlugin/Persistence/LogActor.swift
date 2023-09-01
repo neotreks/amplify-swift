@@ -58,4 +58,9 @@ actor LogActor {
         try rotation.reset()
         try synchronize()
     }
+
+    func rotate() throws {
+        try rotation.rotate()
+        try synchronize()
+    }
 }

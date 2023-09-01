@@ -175,6 +175,7 @@ final class AWSCloudWatchLoggingSessionController {
     private func consumeLogBatch(_ batch: LogBatch) async throws {
         do {
             try await consumer?.consume(batch: batch)
+            try await session?.logger.rotate()
         } catch {
             Amplify.Logging.default.error("Error flushing logs with error \(error.localizedDescription)")
             let payload = HubPayload(eventName: HubPayload.EventName.Logging.flushLogFailure, context: error.localizedDescription)
